@@ -1,12 +1,15 @@
-
+import { useState } from "react"
 import { Button } from "@mui/material"
 import TextField from "@mui/material/TextField"
 import { Switch } from '@mui/material';
-import {FormGroup} from "@mui/material";
-import {FormControlLabel} from "@mui/material";
+import { FormGroup } from "@mui/material";
+import { FormControlLabel } from "@mui/material";
 
 
 function FormSingUp () {
+
+    const [name,setName] = useState("")
+
     return (
         <form>
             <TextField 
@@ -15,6 +18,11 @@ function FormSingUp () {
                 variant="outlined"
                 fullWidth
                 margin="normal"
+                value={name}
+                onChange={(e)=> {
+                    setName(e.target.value)
+                    console.log(e.target.value)
+                }}
             />
             <TextField 
                 id="lastName" 
