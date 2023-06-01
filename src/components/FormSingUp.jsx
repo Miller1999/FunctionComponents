@@ -14,6 +14,25 @@ function FormSingUp (props) {
     const [email,setEmail] = useState("")
     const [prom,setProm] = useState(true)
     const [nov,setNov] = useState(false)
+    const [errors,setErrors] = useState({
+        name:{
+            error: false,
+            message:"Deben ser al menos tres caracteres"
+        },
+        lastName:{
+            error: false,
+            message: "Deben ser al menos tres caracteres"
+        },
+    })
+
+    function validarTextos(id,value){
+        if(value.length >= 3 && id === "name"){
+            return({ name: {error:false,message:""}})
+        }
+        else{
+            return({ name: {error:true,message:"Deben ser al menos tres caracteres"}})
+        }
+    }
 
     return (
         <form onSubmit={(e) => {
@@ -28,6 +47,10 @@ function FormSingUp (props) {
                 margin="normal"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                error={errors.name.error}
+                helperText={errors.name.error ? errors.name.message : " "}
+                onBlur={(e) => {setErrors(validarTextos(e.target.id,e.target.value))
+                console.log(e.target.id)}}
             />
             <TextField 
                 id="lastName" 
@@ -36,7 +59,9 @@ function FormSingUp (props) {
                 fullWidth
                 margin="normal"
                 value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) => {setLastName(e.target.value) 
+                    console.log(e)}}
+
             />
             <TextField 
                 id="email" 
